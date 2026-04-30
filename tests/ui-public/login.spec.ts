@@ -17,21 +17,21 @@ let errorMessage: Locator;
     errorMessage = page.getByText('Your email or password is');
   });
 
-  test('Logowanie - nieistniejący użytkownik', async () => {
+  test('LOG_001 Logowanie - nieistniejący użytkownik', async () => {
     await emailInput.fill('testowy@test.com');
     await passwordInput.fill('testowy123');
     await loginButton.click();
 
     await expect(errorMessage).toBeVisible();
   });
-  test('Logowanie - istniejący użytkownik', async ({page}) => {
+  test('LOG_002 Logowanie - istniejący użytkownik', async ({page}) => {
     await emailInput.fill('testowy@test.com');
     await passwordInput.fill('Test123');
     await loginButton.click();
     await expect(page.getByRole('link', { name: 'Logout' })).toBeVisible()
   });
 
-  test('Walidacja - pusty email', async () => {
+  test('LOG_003 Walidacja - pusty email', async () => {
     await passwordInput.fill('testowy123');
     await loginButton.click();
 
@@ -42,7 +42,7 @@ let errorMessage: Locator;
     expect(message).not.toBe('');
   });
 
-  test('Walidacja - nieprawidłowy email', async () => {
+  test('LOG_004 Walidacja - nieprawidłowy email', async () => {
     await emailInput.fill('testowytest.com');
     await passwordInput.fill('testowy123');
     await loginButton.click();
@@ -54,7 +54,7 @@ let errorMessage: Locator;
     expect(message).not.toBe('');
   });
 
-  test('Walidacja - pusty password', async () => {
+  test('LOG_005 Walidacja - pusty password', async () => {
     await emailInput.fill('testowy@test.com');
     await loginButton.click();
 

@@ -2,7 +2,7 @@ import{test, expect} from '@playwright/test'
 import { createUserData, updatedUserData } from '../../utils/api-user-data';
 
 
-test("Pełny cykl życia użytkownika przez API", async({request})=>{
+test("API_001 Pełny cykl życia użytkownika przez API", async({request})=>{
     const email = `testemail${Date.now()}@email.com`
     const password = "Testowe123!"
     const userData = createUserData(email, password);
@@ -64,7 +64,7 @@ expect(bodyUserDetails.user.zipcode).toBe(userUpdatedData.zipcode);
   expect(deleteBody.message).toBe("Account deleted!");
 })
 
-test('Logowanie bez podania hasła', async({request})=>{
+test('API_002 Logowanie bez podania hasła', async({request})=>{
   const response = await request.post('/api/verifyLogin', {
     form :{
       email:`testowy${Date.now()}@email.com`
@@ -76,7 +76,7 @@ test('Logowanie bez podania hasła', async({request})=>{
   expect(body.responseCode).toBe(400);
   expect(body.message).toBe('Bad request, email or password parameter is missing in POST request.');
 })
-test('Logowanie złym hasłem', async ({request})=>{
+test('API_003 Logowanie złym hasłem', async ({request})=>{
 const response = await request.post('/api/verifyLogin', {
   form:{
       email:'testowy@test.com',

@@ -10,7 +10,7 @@ test.beforeEach(async ({ page }) => {
   }
   await page.getByRole('link', { name: 'Contact us' }).click()
 });
-test('Widoczność pól kontaktowych',async({page})=>{
+test('CON_001 Widoczność pól kontaktowych',async({page})=>{
     await expect(page.getByRole('textbox', { name: 'Name' })).toBeVisible()
     await expect(page.getByRole('textbox', { name: 'Email', exact: true })).toBeVisible()
     await expect(page.getByRole('textbox', { name: 'Subject' })).toBeVisible()
@@ -18,7 +18,7 @@ test('Widoczność pól kontaktowych',async({page})=>{
     await expect(page.getByRole('button', { name: 'Choose File' })).toBeVisible()
     await expect(page.getByRole('button', { name: 'Submit' })).toBeVisible()
 })
-test('Wysłanie pustego formularza', async({page})=>{
+test('CON_002 Wysłanie pustego formularza', async({page})=>{
     await page.getByRole('button', { name: 'Submit' }).click()
       const emailInput = page.locator('input[data-qa="email"]');
 
@@ -28,7 +28,7 @@ test('Wysłanie pustego formularza', async({page})=>{
 
   expect(message).not.toBe('');
 })
-test("Wysłanie prawidłowo wypełnionego formularza kontaktowego", async({page})=>{
+test("CON_003 Wysłanie prawidłowo wypełnionego formularza kontaktowego", async({page})=>{
 
   await page.getByRole('textbox', { name: 'Name' }).fill("Alex")
   await page.locator('input[data-qa="email"]').fill("alek@gmail.com")
@@ -42,7 +42,7 @@ await expect(page.locator('#contact-page').getByText('Success! Your details have
 
 })
 
-test("Walicacja email-powinien zawierać `@`",async ({page})=>{
+test("CON_004 Walicacja email-powinien zawierać `@`",async ({page})=>{
    const emailInput = page.locator('input[data-qa="email"]');
    await emailInput.fill('aleks_com')
     await page.getByRole('button', { name: 'Submit' }).click()
@@ -51,7 +51,7 @@ test("Walicacja email-powinien zawierać `@`",async ({page})=>{
   );
   expect(message).toContain("@")
 })
-test('Formularz powinien wymagać wszystkich pól obowiązkowych @bug', async ({ page }) => {
+test('CON_005 Formularz powinien wymagać wszystkich pól obowiązkowych @bug', async ({ page }) => {
   await page.locator('input[data-qa="email"]').fill('alek@gmail.com');
 
     page.on("dialog",dialog =>{ 
@@ -65,7 +65,7 @@ test('Formularz powinien wymagać wszystkich pól obowiązkowych @bug', async ({
 // Expected: formularz nie powinien zostać wysłany bez podania wszystkich wymaganych danych.
 // Actual: aplikacja pomija walidację i wyświetla komunikat sukcesu.
 });
-test('Formularz kontaktowy - upload pliku', async ({ page }) =>{
+test('CON_006 Formularz kontaktowy - upload pliku', async ({ page }) =>{
     await page.getByRole('textbox', { name: 'Name' }).fill("Alex")
   await page.locator('input[data-qa="email"]').fill("alek@gmail.com")
   await page.getByRole('textbox', { name: 'Subject' }).fill("Testowy temat")

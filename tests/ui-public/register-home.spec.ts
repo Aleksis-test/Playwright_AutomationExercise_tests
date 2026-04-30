@@ -10,14 +10,14 @@ test.describe("Signup - home step", () => {
     await signupPage.open();
   });
 
-  test("Wysłanie pustych pól rejestracyjnych", async () => {
+  test("REG_H_001 Wysłanie pustych pól rejestracyjnych", async () => {
     await signupPage.clickSignup();
 
     const message = await signupPage.getNameValidationMessage();
     expect(message).not.toBe("");
   });
 
-  test("Wysłanie pustego pola Name", async () => {
+  test("REG_H_002 Wysłanie pustego pola Name", async () => {
     await signupPage.fillEmail("aleks@gmail.com");
     await signupPage.clickSignup();
 
@@ -25,7 +25,7 @@ test.describe("Signup - home step", () => {
     expect(message).not.toBe("");
   });
 
-  test("Wysłanie pustego pola Email Address", async () => {
+  test("REG_H_003 Wysłanie pustego pola Email Address", async () => {
     await signupPage.fillName("Alex");
     await signupPage.clickSignup();
 
@@ -33,7 +33,7 @@ test.describe("Signup - home step", () => {
     expect(message).not.toBe("");
   });
 
-  test("Prawidłowe wypełnienie pól Name i Email Address", async () => {
+  test("REG_H_004 Prawidłowe wypełnienie pól Name i Email Address", async () => {
     const user = createRandomUser();
 
     await signupPage.signup(user.name, user.email);

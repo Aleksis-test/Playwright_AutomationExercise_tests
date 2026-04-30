@@ -1,6 +1,6 @@
 import{test, expect} from '@playwright/test'
 
-test('Pobieranie listy produktów', async({request})=>{
+test('API_004 Pobieranie listy produktów', async({request})=>{
 const response = await request.get("/api/productsList");
   const body = await response.json();
 
@@ -9,7 +9,7 @@ const response = await request.get("/api/productsList");
   expect(body.products.length).toBeGreaterThan(0);
 })
 
-test('Produkt ma wszystkie wymagane pola', async({request})=>{
+test('API_005 Produkt ma wszystkie wymagane pola', async({request})=>{
 const response = await request.get("/api/productsList")
 const body = await response.json();
 const firstProduct= await body.products[0]
@@ -22,7 +22,7 @@ const firstProduct= await body.products[0]
   expect(firstProduct).toHaveProperty("category");
 })
 
-test("Pobranie listy marek", async ({ request }) => {
+test("API_006 Pobranie listy marek", async ({ request }) => {
   const response = await request.get("/api/brandsList");
   const body = await response.json();
 
@@ -31,7 +31,7 @@ test("Pobranie listy marek", async ({ request }) => {
   expect(body.brands.length).toBeGreaterThan(0);
 });
 
-test("Wyszukiwanie produktu po nazwie", async ({ request }) => {
+test("API_007 Wyszukiwanie produktu po nazwie", async ({ request }) => {
   const response = await request.post("/api/searchProduct", {
     form: {
       search_product: "top",
@@ -44,7 +44,7 @@ test("Wyszukiwanie produktu po nazwie", async ({ request }) => {
   expect(body.products.length).toBeGreaterThan(0);
 });
 
-test("Wyszukiwanie produktu bez parametru", async ({ request }) => {
+test("API_008 Wyszukiwanie produktu bez parametru", async ({ request }) => {
   const response = await request.post("/api/searchProduct");
   const body = await response.json();
 

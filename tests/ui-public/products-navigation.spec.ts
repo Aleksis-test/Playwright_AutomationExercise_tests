@@ -18,7 +18,7 @@ async function openMainCategory(page: Page, category: string) {
   }
 }
 
-test("Widoczność strony głównej z produktami", async ({ page }) => {
+test("PROD_001 Widoczność strony głównej z produktami", async ({ page }) => {
   await expect(page.getByRole("heading", { name: "All Products" })).toBeVisible();
   await expect(page.getByRole("heading", { name: "Category" })).toBeVisible();
   await expect(page.getByRole("heading", { name: "Brands" })).toBeVisible();
