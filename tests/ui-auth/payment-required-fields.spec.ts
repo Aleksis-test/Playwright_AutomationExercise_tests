@@ -18,37 +18,37 @@ test.beforeEach(async({page, orderReadyToPayment})=>{
 test("PAY_001 Widoczność pól formularza płatności", async ({ orderReadyToPayment}) => {
  await payment.correctView()
 });
-test('Wysłanie pustego formularza', async({ orderReadyToPayment})=>{
+test('PAY_002 Wysłanie pustego formularza', async({ orderReadyToPayment})=>{
 await payment.sendOrder()
 await payment.messageValidationNameOnCard()
 })
-test('PAY_002 Wysłanie formularza bez numeru karty', async({ orderReadyToPayment})=>{
+test('PAY_003 Wysłanie formularza bez numeru karty', async({ orderReadyToPayment})=>{
     await payment.fillFormwithoutCardNumber(validPaymentData)
     await payment.sendOrder()
     await payment.messageValidationCardNumber();
 })
-test('PAY_003 Wysłanie formularza bez CVC', async({ orderReadyToPayment})=>{
+test('PAY_004 Wysłanie formularza bez CVC', async({ orderReadyToPayment})=>{
     await payment.fillFormwithoutCVC(validPaymentData)
     await payment.sendOrder()
     await payment.messageValidationCVC();
 })
-test('PAY_004 Wysłanie formularza bez podania miesiąca', async({ orderReadyToPayment})=>{
+test('PAY_005 Wysłanie formularza bez podania miesiąca', async({ orderReadyToPayment})=>{
     await payment.fillFormwithoutMonth(validPaymentData)
     await payment.sendOrder()
     await payment.messageValidationMonth();
 })
-test('PAY_005 Wysłanie formularza bez podania roku', async({ orderReadyToPayment})=>{
+test('PAY_006 Wysłanie formularza bez podania roku', async({ orderReadyToPayment})=>{
     await payment.fillFormwithoutYear(validPaymentData)
     await payment.sendOrder()
     await payment.messageValidationYear();
 })
-test('PAY_006 Wysłanie poprawinie wypełnionego formularza', async({ orderReadyToPayment})=>{
+test('PAY_007 Wysłanie poprawinie wypełnionego formularza', async({ orderReadyToPayment})=>{
     await payment.fillAllForm(validPaymentData)
     await payment.sendOrder()
   await payment.orderConfirmedMessageVisible()
 
 })
-test("PAY_007 Formularz płatności akceptuje niepoprawne dane @bug", async () => {
+test("PAY_008 Formularz płatności akceptuje niepoprawne dane @bug", async () => {
   await payment.fillAllForm({
     nameCard: "Test User",
     numberCard: "ABCD@@@@",
@@ -64,7 +64,7 @@ test("PAY_007 Formularz płatności akceptuje niepoprawne dane @bug", async () =
 // Actual: zamówienie zostaje potwierdzone.
 });
 
-test("PAY_008 Pobranie faktury po złożeniu zamówienia", async ({ page, orderReadyToPayment }) => {
+test("PAY_009 Pobranie faktury po złożeniu zamówienia", async ({ page, orderReadyToPayment }) => {
   await payment.fillAllForm(validPaymentData);
   await payment.sendOrder();
   await payment.orderConfirmedMessageVisible();
