@@ -54,13 +54,14 @@ test("CON_004 Walicacja email-powinien zawierać `@`",async ({page})=>{
 test('CON_005 Formularz powinien wymagać wszystkich pól obowiązkowych @bug', async ({ page }) => {
   await page.locator('input[data-qa="email"]').fill('alek@gmail.com');
 
-    page.on("dialog",dialog =>{ 
-    expect(dialog.message()).toEqual("Press OK to proceed!") 
-     dialog.accept() })
+     page.once('dialog', async dialog => {
+    expect(dialog.message()).toBe('Press OK to proceed!');
+    await dialog.accept();
+  });
 
   await page.locator('input[data-qa="submit-button"]').click();
 
-  await expect(page.locator('.status.alert.alert-success')).toBeVisible();
+  await expect(page.locator('.status.alert.alert-success')).not.toBeVisible();
 // BUG: Formularz kontaktowy nie wymaga uzupełnienia wszystkich pól obowiązkowych.
 // Expected: formularz nie powinien zostać wysłany bez podania wszystkich wymaganych danych.
 // Actual: aplikacja pomija walidację i wyświetla komunikat sukcesu.
